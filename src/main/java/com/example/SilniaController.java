@@ -2,26 +2,29 @@ package com.example;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import javax.validation.Valid;
+
 @Controller
 public class SilniaController {
-    @RequestMapping("/")
-String index(){
-return "index";
 
 
-
-}
-    String olo = "loloo";
-    @RequestMapping(value = "message", method = RequestMethod.GET)
-    public String messages(Model model) {
-        model.addAttribute("message", olo);
-        return "message";
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String index(Post post) {
+        return "index";
     }
 
 
+    @RequestMapping(value = "/", method = RequestMethod.POST)
+    public String addNewPost(@Valid Post post, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "index";
+        }
+        model.addAttribute("title", post.getTitle());
+        model.addAttribute("content", post.getContent());
+        return "result";
+    }
 }
