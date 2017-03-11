@@ -4,6 +4,9 @@ import javax.validation.constraints.Size;
 
 public class Post {
 
+    @Size(min=1 , max=20)
+    private String message = "łojojo";
+
     @Size(min=4, max=35)
     private String title;
 
@@ -24,5 +27,15 @@ public class Post {
 
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public String getMessage() {
+        return message;
+    }
+
+    public void setMessage(String message) {
+        this.message = message;
+        message = "sisiseniorita";
+        this.message = "wiwimonsieur";
     }
 }
